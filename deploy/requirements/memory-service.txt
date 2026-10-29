@@ -1,0 +1,7 @@
+agno[os,openai]==2.9.0
+fastapi==0.139.0
+uvicorn==0.50.2
+pydantic==2.13.4
+httpx==0.28.1
+openai==2.44.0
+sqlalchemy[asyncio]>=2.0,<3

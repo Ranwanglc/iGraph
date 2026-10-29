@@ -55,7 +55,7 @@ class AgentRuntimeConfig:
     llm_timeout_seconds: float = 180.0
 
     @classmethod
-    def from_env(cls) -> "AgentRuntimeConfig":
+    def from_env(cls, *, require_graph_mcp: bool = True) -> "AgentRuntimeConfig":
         data_root = Path(os.getenv("IGRAPH_DATA_ROOT", "data")).resolve()
         skills_root = Path(
             os.getenv("AGENT_RUNTIME_SKILLS_ROOT", str(data_root / "agent_runtime" / "skills"))
@@ -67,7 +67,10 @@ class AgentRuntimeConfig:
                 "AGENT_RUNTIME_DATABASE_URL",
                 "postgresql+psycopg://igraph:igraph@postgres:5432/igraph",
             ),
-            mcp_url=_required("GRAPH_ENGINE_MCP_URL", os.getenv("MCP_SERVER_URL", "")),
+            mcp_url=(
+                _required("GRAPH_ENGINE_MCP_URL", os.getenv("MCP_SERVER_URL", ""))
+                if require_graph_mcp else os.getenv("GRAPH_ENGINE_MCP_URL", "")
+            ),
             # Provider-specific credentials are resolved lazily per selected
             # model, retaining the legacy QWEN/DEEPSEEK/ARK fallbacks.
             llm_api_key=os.getenv("LLM_API_KEY", "").strip(),
