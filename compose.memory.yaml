@@ -1,0 +1,19 @@
+name: igraph-memory-extractor
+services:
+  memory-extractor:
+    build:
+      context: .
+      dockerfile: deploy/docker/memory-service.Dockerfile
+      args:
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.12-slim}
+    environment:
+      IGRAPH_MEMORY_HOST: 0.0.0.0
+      IGRAPH_MEMORY_SERVICE_KEY: ${IGRAPH_MEMORY_SERVICE_KEY:?Set IGRAPH_MEMORY_SERVICE_KEY}
+      IGRAPH_MEMORY_MODEL: ${IGRAPH_MEMORY_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      QWEN_API_KEY: ${QWEN_API_KEY:-}
+      QWEN_BASE_URL: ${QWEN_BASE_URL:-}
+      AGNO_TELEMETRY: "false"
+    ports:
+      - "127.0.0.1:${IGRAPH_MEMORY_PORT:-21113}:21113"

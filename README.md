@@ -67,6 +67,8 @@ model setup, optional GPU support, backups, and troubleshooting.
 For the broader design and capabilities, read the **[Technical Report](https://igraph-docs.graphagent.workers.dev)**.
 For implementation details, see the [developer documentation](docs/README.md).
 
+This fork also provides a standalone, evidence-backed memory extraction API for OpenClaw Octo channels. See the [graph memory service guide](docs/guides/GRAPH_MEMORY.md) and the [Octo Memory Graph backend](https://github.com/Ranwanglc/octo-memory-graph). This addition runs separately from the regular iGraph workspace.
+
 ## 📬 Contact
 
 ### WeChat group
